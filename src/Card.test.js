@@ -11,3 +11,15 @@ it("renders without crashing", function() {
     />
   );
 });
+
+it("matches snapshot", function() {
+    const { asFragment } = render(
+      <Card
+        caption="Photo Caption"
+        src="image1.jpg"
+        currNum={1}
+        totalNum={3}
+      />
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
