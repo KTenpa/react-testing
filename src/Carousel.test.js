@@ -7,6 +7,12 @@ it("renders without crashing", function() {
   render(<Carousel photos={TEST_IMAGES} title="Test Carousel" />);
 });
 
+//Snapshot Test for Carousel Component
+it("matches snapshot", function() {
+  const { asFragment } = render(<Carousel photos={TEST_IMAGES} title="Test Carousel" />);
+  expect(asFragment()).toMatchSnapshot();
+});
+
 
 it("works when you click on the right arrow", function() {
   const { container } = render(
