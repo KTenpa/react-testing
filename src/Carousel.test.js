@@ -80,3 +80,29 @@ it("left arrow should go to the previous image", function() {
     container.querySelector('img[alt="testing image 2"]')
   ).not.toBeInTheDocument();
 });
+
+
+//Test for Arrow Visibility
+it("hides the left arrow when on the first image", function() {
+  const { container } = render(
+    <Carousel photos={TEST_IMAGES} title="Test Carousel" />
+  );
+  
+  // Initially, the left arrow should be hidden (first image)
+  const leftArrow = container.querySelector(".bi-arrow-left-circle");
+  expect(leftArrow).not.toBeInTheDocument();
+});
+
+it("hides the right arrow when on the last image", function() {
+  const { container } = render(
+    <Carousel photos={TEST_IMAGES} title="Test Carousel" />
+  );
+
+  // Move to the last image
+  const rightArrow = container.querySelector(".bi-arrow-right-circle");
+  fireEvent.click(rightArrow);
+  fireEvent.click(rightArrow);
+
+  // Now the right arrow should be hidden (last image)
+  expect(rightArrow).not.toBeInTheDocument();
+});
