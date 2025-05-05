@@ -25,9 +25,9 @@ import Card from "./Card";
     setCurrCardIdx(currCardIdx + 1);
   }
 
-  // function goBack() {
-  //   setCurrCardIdx(currCardIdx - 1);
-  // }
+  function goBack() {
+    setCurrCardIdx(currCardIdx - 1);
+  }
 
   return (
     <div className="Carousel">
@@ -35,8 +35,7 @@ import Card from "./Card";
       <div className="Carousel-main">
         <i
           className="bi bi-arrow-left-circle"
-          // onClick={goBack}
-          onClick={goForward}
+          onClick={goBack}
         />
         <Card
           caption={currCard.caption}
