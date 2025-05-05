@@ -7,6 +7,7 @@ it("renders without crashing", function() {
   render(<Carousel photos={TEST_IMAGES} title="Test Carousel" />);
 });
 
+
 //Snapshot Test for Carousel Component
 it("matches snapshot", function() {
   const { asFragment } = render(<Carousel photos={TEST_IMAGES} title="Test Carousel" />);
@@ -14,6 +15,7 @@ it("matches snapshot", function() {
 });
 
 
+//Test for Right Arrow
 it("works when you click on the right arrow", function() {
   const { container } = render(
     <Carousel
@@ -40,4 +42,41 @@ it("works when you click on the right arrow", function() {
   expect(
     container.querySelector('img[alt="testing image 2"]')
   ).toBeInTheDocument();
+});
+
+
+//Test for Left Arrow
+it("left arrow should go to the previous image", function() {
+  const { container } = render(
+    <Carousel
+      photos={TEST_IMAGES}
+      title="Test Carousel"
+    />
+  );
+
+  // expect the first image to show
+  expect(
+    container.querySelector('img[alt="testing image 1"]')
+  ).toBeInTheDocument();
+
+  // Click right arrow to move to second image
+  const rightArrow = container.querySelector(".bi-arrow-right-circle");
+  fireEvent.click(rightArrow);
+
+  // Second image should be visible now
+  expect(
+    container.querySelector('img[alt="testing image 2"]')
+  ).toBeInTheDocument();
+
+  // Now click the left arrow to move back to the first image
+  const leftArrow = container.querySelector(".bi-arrow-left-circle");
+  fireEvent.click(leftArrow);
+
+  // First image should be visible again
+  expect(
+    container.querySelector('img[alt="testing image 1"]')
+  ).toBeInTheDocument();
+  expect(
+    container.querySelector('img[alt="testing image 2"]')
+  ).not.toBeInTheDocument();
 });
